@@ -1,0 +1,15 @@
+---
+- hosts: all
+  tasks:
+
+    - name: setup hostname
+      hostname:
+        name: "{{ hostname }}"
+      when: "{{ hostname }}" is defined
+
+    - name: register to RHSM
+      redhat_subscription:
+        state: present
+        username: "{{ user }}"
+        password: "{{ pass }}"
+        auto_attach: true
